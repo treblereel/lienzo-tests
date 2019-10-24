@@ -24,6 +24,7 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 @RunWith(LienzoMockitoTestRunner.class)
+@WithClassesToStub(com.ait.lienzo.test.stub.overlays.Point2DArray.class)
 public class OrthogonalPolyLineTest
 {
 

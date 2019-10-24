@@ -61,6 +61,8 @@ public class PolyLineTest {
         final Point2D point2 = new Point2D(2, 2);
         final Point2DArray point2DArray = makePointArray(point1, point2);
 
+        System.out.println("point2DArray " + point2DArray.size() + " " + point2DArray.get(0) + " " + point2DArray.get(1));
+
         polyLine.setPoint2DArray(point2DArray);
         polyLine.parse(); //TODO not sure if it must be called
 

@@ -78,7 +78,6 @@ import com.ait.lienzo.test.translator.StripFinalModifiersTranslatorInterceptor;
                 com.ait.lienzo.test.stub.overlays.ScratchPad.class,
                 com.ait.lienzo.test.stub.overlays.Timer.class,
 
-
 /*                com.ait.lienzo.test.stub.overlays.BoundingBoxJSO.class,
                 com.ait.lienzo.test.stub.overlays.DragBoundsJSO.class,
                 com.ait.lienzo.test.stub.overlays.TransformJSO.class,
