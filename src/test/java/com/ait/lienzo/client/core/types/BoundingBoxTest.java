@@ -31,7 +31,7 @@ public class BoundingBoxTest
     @Test
     public void testInit()
     {
-        final BoundingBox box = new BoundingBox(-1000, -200, -100, 300);
+        final BoundingBox box = BoundingBox.fromDoubles(-1000, -200, -100, 300);
 
         assertEquals(box.getX(), -1000d, 0);
         assertEquals(box.getY(), -200d, 0);
@@ -42,11 +42,11 @@ public class BoundingBoxTest
     @Test
     public void testIntersect()
     {
-        BoundingBox box1 = new BoundingBox(0, 0, 100, 100);
-        BoundingBox box2 = new BoundingBox(50, 50, 150, 150);
-        BoundingBox box3 = new BoundingBox(100, 100, 0, 0);
-        BoundingBox box4 = new BoundingBox(200, 200, 0, 0);
-        BoundingBox box5 = new BoundingBox(10, 10, 25, 25);
+        BoundingBox box1 = BoundingBox.fromDoubles(0, 0, 100, 100);
+        BoundingBox box2 = BoundingBox.fromDoubles(50, 50, 150, 150);
+        BoundingBox box3 = BoundingBox.fromDoubles(100, 100, 0, 0);
+        BoundingBox box4 = BoundingBox.fromDoubles(200, 200, 0, 0);
+        BoundingBox box5 = BoundingBox.fromDoubles(10, 10, 25, 25);
         assertTrue(box1.intersects(box2));
         assertTrue(box2.intersects(box1));
         assertTrue(box3.intersects(box2));

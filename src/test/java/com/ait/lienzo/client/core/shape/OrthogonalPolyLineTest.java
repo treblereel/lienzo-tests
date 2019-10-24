@@ -5,6 +5,7 @@ import com.ait.lienzo.client.core.types.Point2D;
 import com.ait.lienzo.client.core.types.Point2DArray;
 import com.ait.lienzo.shared.core.types.Direction;
 import com.ait.lienzo.test.LienzoMockitoTestRunner;
+import com.google.gwtmockito.WithClassesToStub;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -29,9 +30,6 @@ public class OrthogonalPolyLineTest
     @Mock
     Point2DArray array;
 
-    @Mock
-    Attributes attributes;
-
     @Test
     public void testGetBoundingBoxForEmptyPath()
     {
@@ -46,19 +44,20 @@ public class OrthogonalPolyLineTest
         assertEquals(0, box.getMaxY(), 0.000001);
     }
 
+
     @Test
     public void testParse()
     {
         Point2DArray points = new Point2DArray();
-        when(attributes.getControlPoints()).thenReturn(points);
-        when(attributes.getHeadDirection()).thenReturn(NONE);
-        when(attributes.getTailDirection()).thenReturn(NONE);
         OrthogonalPolyLine polyLine = spy(new OrthogonalPolyLine(points));
-        assertFalse(polyLine.parse(attributes));
 
-        points.push(0, 0);
-        points.push(5, 5);
-        assertTrue(polyLine.parse(attributes));
+        when(polyLine.getControlPoints()).thenReturn(points);
+        when(polyLine.getHeadDirection()).thenReturn(NONE);
+        when(polyLine.getTailDirection()).thenReturn(NONE);
+
+        points.push(new Point2D(0, 0));
+        points.push(new Point2D(5, 5));
+        assertTrue(polyLine.parse());
     }
 
     @Test

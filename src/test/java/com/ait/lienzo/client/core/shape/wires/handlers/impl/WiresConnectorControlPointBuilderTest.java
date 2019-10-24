@@ -16,6 +16,9 @@
 
 package com.ait.lienzo.client.core.shape.wires.handlers.impl;
 
+import java.util.function.Function;
+import java.util.function.Predicate;
+
 import com.ait.lienzo.client.core.animation.IAnimationHandle;
 import com.ait.lienzo.client.core.shape.AbstractMultiPointShape;
 import com.ait.lienzo.client.core.shape.Arc;
@@ -34,11 +37,9 @@ import com.ait.lienzo.client.core.types.Point2D;
 import com.ait.lienzo.client.core.types.Transform;
 import com.ait.lienzo.shared.core.types.ColorName;
 import com.ait.lienzo.test.LienzoMockitoTestRunner;
-import com.ait.tooling.common.api.java.util.function.Function;
-import com.ait.tooling.common.api.java.util.function.Predicate;
-import com.ait.tooling.nativetools.client.event.HandlerRegistrationManager;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.Timer;
+import com.ait.lienzo.tools.client.Timer;
+import com.ait.lienzo.tools.client.event.HandlerRegistration;
+import com.ait.lienzo.tools.client.event.HandlerRegistrationManager;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,7 +73,7 @@ public class WiresConnectorControlPointBuilderTest
     private PointHandleDecorator              pointHandleDecorator;
 
     @Mock
-    private HandlerRegistrationManager        controlEvents;
+    private HandlerRegistrationManager controlEvents;
 
     @Mock
     private Viewport                          viewport;
@@ -194,8 +195,8 @@ public class WiresConnectorControlPointBuilderTest
         tested.moveControlPointTo(55, 55);
 
         assertNull(tested.exitTimer);
-        assertEquals(55.00000000000001d, tested.mousePointerCP.getX(), 0d);
-        assertEquals(55.00000000000001d, tested.mousePointerCP.getY(), 0d);
+        assertEquals(55.0d, tested.mousePointerCP.getX(), 0d);
+        assertEquals(55.0d, tested.mousePointerCP.getY(), 0d);
         assertEquals(AbstractMultiPointShape.DefaultMultiPointShapeHandleFactory.SELECTION_OFFSET, tested.mousePointerCP.getSelectionBoundsOffset(), 0d);
         assertEquals(AbstractMultiPointShape.DefaultMultiPointShapeHandleFactory.SELECTION_OFFSET, tested.mousePointerCP.getSelectionBoundsOffset(), 0d);
         assertTrue(tested.mousePointerCP.isListening());

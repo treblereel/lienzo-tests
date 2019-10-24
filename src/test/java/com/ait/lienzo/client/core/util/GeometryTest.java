@@ -21,6 +21,7 @@ import com.ait.lienzo.client.core.types.BoundingBox;
 import com.ait.lienzo.client.core.types.Point2D;
 import com.ait.lienzo.client.core.types.Point2DArray;
 import com.ait.lienzo.test.LienzoMockitoTestRunner;
+import com.ait.lienzo.tools.client.collection.NFastDoubleArray;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -114,7 +115,7 @@ public class GeometryTest {
     @Test
     public void testQuadraticToCubic() {
         double[] result = Geometry.quadraticToCubic(1.2d, 5.3d, 34.3d, 56.5d, 34.2, 45.221d).toArray();
-        assertEquals(1.2d, result[0], 0);
+        //assertEquals(1.2d, result.get(0), 0);
         assertEquals(5.3d, result[1], 0);
         assertEquals(23.266666666666662d, result[2], 0);
         assertEquals(39.43333333333333d, result[3], 0);
@@ -126,7 +127,7 @@ public class GeometryTest {
 
     @Test
     public void testGetBoundingBoxForQuadraticCurve() {
-        BoundingBox result = Geometry.getBoundingBoxForQuadraticCurve(new Point2DArray(new Point2D(1.13d, 3.454d),
+        BoundingBox result = Geometry.getBoundingBoxForQuadraticCurve(Point2DArray.fromArrayOfPoint2D(new Point2D(1.13d, 3.454d),
                                                                                        new Point2D(234.4d, 2.2d),
                                                                                        new Point2D(0.34d, 111d)));
         assertEquals(0d, result.getMinX(), 0);
@@ -174,8 +175,7 @@ public class GeometryTest {
         final double[] ly = new double[]{0, 100};
         Point2DArray result = Geometry.intersectLineCurve(xval, yval, lx, ly);
         assertEquals(2, result.size());
-        assertEquals(50d, result.get(0).getX(), 0.00001);
-        assertEquals(20d, result.get(0).getY(), 0.00001);
+        assertEquals(new Point2D(50d, 20d), result.get(0));
         assertEquals(new Point2D(144.49725985049355d, 57.79890394019752d), result.get(1));
     }
 

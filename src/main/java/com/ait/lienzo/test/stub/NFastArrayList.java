@@ -34,12 +34,12 @@ import com.ait.lienzo.test.util.LienzoMockitoLogger;
  * @since 1.0
  *
  */
-@StubClass("com.ait.tooling.nativetools.client.collection.NFastArrayList")
+@StubClass("com.ait.lienzo.tools.client.collection.NFastArrayList")
 public class NFastArrayList<M> implements Iterable<M>
 {
-    private static final class FastArrayListJSO<M> extends com.ait.tooling.nativetools.client.NArrayBaseJSO<FastArrayListJSO<M>>
+    /*private static final class FastArrayListJSO<M> extends NArrayBaseJSO<FastArrayListJSO<M>>
     {
-    }
+    }*/
 
     private final ArrayList<M> list = new ArrayList<M>();
 
@@ -65,10 +65,10 @@ public class NFastArrayList<M> implements Iterable<M>
     }
 
     @SuppressWarnings("unused")
-    private NFastArrayList(final FastArrayListJSO<M> jso)
+/*    private NFastArrayList(final FastArrayListJSO<M> jso)
     {
         this();
-    }
+    }*/
 
     public boolean isEmpty()
     {
@@ -80,13 +80,9 @@ public class NFastArrayList<M> implements Iterable<M>
         return list.size();
     }
 
-    public M get(final int index)
+    public <M> M get(final int index)
     {
-        if ((index >= 0) && (index < size()))
-        {
-            return list.get(index);
-        }
-        return null;
+        return (M)list.get(index);
     }
 
     public NFastArrayList<M> add(final M value)
@@ -108,11 +104,9 @@ public class NFastArrayList<M> implements Iterable<M>
         return list.contains(value);
     }
 
-    public NFastArrayList<M> clear()
+    public void clear()
     {
         list.clear();
-
-        return this;
     }
 
     public NFastArrayList<M> remove(final M value)
@@ -284,6 +278,10 @@ public class NFastArrayList<M> implements Iterable<M>
         list.remove(0);
 
         return t;
+    }
+
+    public List<M> asList() {
+        return list;
     }
 
     private void doUnShift(final M value)

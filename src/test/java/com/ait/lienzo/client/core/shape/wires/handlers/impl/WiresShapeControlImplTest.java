@@ -26,7 +26,6 @@ import com.ait.lienzo.client.core.shape.wires.OptionalBounds;
 import com.ait.lienzo.client.core.shape.wires.WiresConnection;
 import com.ait.lienzo.client.core.shape.wires.WiresConnector;
 import com.ait.lienzo.client.core.shape.wires.WiresContainer;
-import com.ait.lienzo.client.core.shape.wires.WiresLayer;
 import com.ait.lienzo.client.core.shape.wires.WiresMagnet;
 import com.ait.lienzo.client.core.shape.wires.WiresShape;
 import com.ait.lienzo.client.core.shape.wires.handlers.AlignAndDistributeControl;
@@ -37,7 +36,7 @@ import com.ait.lienzo.client.core.shape.wires.handlers.WiresMagnetsControl;
 import com.ait.lienzo.client.core.types.Point2D;
 import com.ait.lienzo.client.core.types.Point2DArray;
 import com.ait.lienzo.test.LienzoMockitoTestRunner;
-import com.ait.tooling.nativetools.client.collection.NFastArrayList;
+import com.ait.lienzo.tools.client.collection.NFastArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,8 +57,7 @@ import static org.mockito.Mockito.when;
 public class WiresShapeControlImplTest extends AbstractWiresControlTest {
 
     private static final String CONNECTOR_UUID = "UUID";
-    private static final Point2D CONTROL_POINT_LIENZO = new Point2D(100, 100);
-    private static final Point2DArray CONTROL_POINTS_LIENZO = new Point2DArray(CONTROL_POINT_LIENZO);
+    private static final Point2DArray CONTROL_POINTS_LIENZO = Point2DArray.fromArrayOfDouble(100d, 100d);
 
     @Mock
     private ILocationAcceptor locationAcceptor;
@@ -130,18 +128,34 @@ public class WiresShapeControlImplTest extends AbstractWiresControlTest {
     public void setup() {
         super.setUp();
         manager.setLocationAcceptor(locationAcceptor);
-        connections = new NFastArrayList<>(connection1, connection2);
+        connections = new NFastArrayList<>();
+        connections.add(connection1);
+        connections.add(connection2);
+
+
         line = new PolyLine(0, 0, 10, 10, 100, 100);
         shape.getChildShapes().add(childWiresShape1);
         shape.getChildShapes().add(childWiresShape2);
 
         when(childWiresShape1.getMagnets()).thenReturn(magnets1);
         when(childWiresShape1.getParent()).thenReturn(shape);
+
+
+
         when(magnets1.size()).thenReturn(1);
         when(magnets1.getMagnet(0)).thenReturn(magnet1);
         when(magnets1.getWiresShape()).thenReturn(childWiresShape1);
         when(magnet1.getConnectionsSize()).thenReturn(connections.size());
+
+
+
+
+
         when(magnet1.getConnections()).thenReturn(connections);
+        when(magnet2.getConnections()).thenReturn(connections);
+
+
+
         when(magnet1.getMagnets()).thenReturn(magnets1);
         when(connection1.getConnector()).thenReturn(connector);
         when(connection1.getOppositeConnection()).thenReturn(connection2);
@@ -154,7 +168,6 @@ public class WiresShapeControlImplTest extends AbstractWiresControlTest {
         when(magnets2.getWiresShape()).thenReturn(childWiresShape2);
         when(magnet2.getMagnets()).thenReturn(magnets2);
         when(magnet2.getConnectionsSize()).thenReturn(connections.size());
-        when(magnet2.getConnections()).thenReturn(connections);
         when(connection2.getConnector()).thenReturn(connector);
         when(connection2.getOppositeConnection()).thenReturn(connection1);
         when(connection2.getMagnet()).thenReturn(magnet2);
@@ -168,8 +181,15 @@ public class WiresShapeControlImplTest extends AbstractWiresControlTest {
         when(connector.getTailDecorator()).thenReturn(tailDecorator);
         when(connector.getHeadConnection()).thenReturn(connection1);
         when(connector.getTailConnection()).thenReturn(connection2);
-        when(parentPicker.getShape()).thenReturn(shape);
         when(parentPicker.onMove(10, 10)).thenReturn(false);
+
+
+        parentPicker.getShape();
+
+
+
+
+
         when(connector.getHead()).thenReturn(head);
         when(connector.getTail()).thenReturn(tail);
         when(head.getLocation()).thenReturn(new Point2D(1, 1));
@@ -191,14 +211,13 @@ public class WiresShapeControlImplTest extends AbstractWiresControlTest {
     @Test
     public void testOnMoveStart() {
         tested.onMoveStart(2, 7);
+        verify(index, times(1)).exclude(eq(shape));
+        verify(index, times(1)).exclude(eq(childWiresShape1));
+        verify(index, never()).clear();
         verify(m_dockingAndControl, times(1)).onMoveStart(eq(2d), eq(7d));
         verify(m_containmentControl, times(1)).onMoveStart(eq(2d), eq(7d));
         verify(alignAndDistributeControl, times(1)).dragStart();
         verify(connectorControl, times(1)).onMoveStart(eq(2d), eq(7d));
-        // Verify index is never updated.
-        verify(index, never()).build(any(WiresLayer.class));
-        verify(index, never()).exclude(any(WiresContainer.class));
-        verify(index, never()).clear();
     }
 
     @Test
@@ -375,5 +394,4 @@ public class WiresShapeControlImplTest extends AbstractWiresControlTest {
         assertFalse(tested.isOutOfBounds(800d, 800d));
         assertTrue(tested.isOutOfBounds(1191d, 1191d));
     }
-
 }

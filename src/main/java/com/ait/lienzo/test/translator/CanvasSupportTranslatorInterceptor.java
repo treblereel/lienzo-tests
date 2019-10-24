@@ -17,7 +17,6 @@
 package com.ait.lienzo.test.translator;
 
 import com.google.gwt.canvas.client.Canvas;
-
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;

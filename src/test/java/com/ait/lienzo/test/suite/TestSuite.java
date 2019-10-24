@@ -16,43 +16,38 @@
  *
  */
 
-package com.ait.lienzo.test;
+package com.ait.lienzo.test.suite;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.when;
-
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import com.ait.lienzo.test.BasicLienzoMockTest;
+import com.ait.lienzo.test.LienzoCoreAttributesTest;
+import com.ait.lienzo.test.PointsMockTest;
+import com.ait.lienzo.test.PointsTest;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-
-import com.ait.tooling.nativetools.client.NObjectJSO;
+import org.junit.runners.Suite;
 
 /**
- * This test just shows how Lienzo's overlay type methods can be mocked by using this library, if you need so.
- *
+ * Lienzo testing suite.
  * @author Roger Martinez
  * @since 1.0
- *
  */
-@RunWith(LienzoMockitoTestRunner.class)
-public class JSOMockTest
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+        BasicLienzoMockTest.class,
+        LienzoCoreAttributesTest.class,
+        PointsTest.class,
+        PointsMockTest.class,
+})
+public class TestSuite
 {
-    @Mock
-    NObjectJSO objectJSO;
-
-    @Before
-    public void setup()
+    @BeforeClass
+    public static void setUpClass()
     {
-        when(objectJSO.getAsString(anyString())).thenReturn("My Custom #getAsString");
     }
 
-    @Test
-    public void test()
+    @AfterClass
+    public static void tearDownClass()
     {
-        final String s = objectJSO.getAsString("Lienzo rocks ;)");
-
-        Assert.assertEquals("My Custom #getAsString", s);
     }
 }

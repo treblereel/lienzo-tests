@@ -29,15 +29,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 @RunWith(LienzoMockitoTestRunner.class)
 public class WiresConnectorTest {
@@ -95,14 +88,8 @@ public class WiresConnectorTest {
     {
         tested.addToLayer(new Layer());
         assertNotNull(tested.getGroup().getLayer());
-        WiresConnection headConnection = mock(WiresConnection.class);
-        WiresConnection tailConnection = mock(WiresConnection.class);
-        tested.setHeadConnection(headConnection);
-        tested.setTailConnection(tailConnection);
         tested.destroy();
         assertNull(tested.getGroup().getLayer());
-        verify(headConnection, times(1)).destroy();
-        verify(tailConnection, times(1)).destroy();
         verify(connectorControl, times(1)).destroy();
     }
 

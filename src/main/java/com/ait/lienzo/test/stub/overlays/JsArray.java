@@ -19,10 +19,12 @@ package com.ait.lienzo.test.stub.overlays;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import elemental2.core.JsIterable;
+import jsinterop.base.JsArrayLike;
 import org.apache.commons.lang3.StringUtils;
 
 import com.ait.lienzo.test.annotation.StubClass;
-import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * In-memory array implementation stub for class <code>com.google.gwt.core.client.JsArray</code>.
@@ -31,12 +33,12 @@ import com.google.gwt.core.client.JavaScriptObject;
  * @since 1.0
  *
  */
-@StubClass("com.google.gwt.core.client.JsArray")
-public class JsArray<T extends JavaScriptObject> extends JavaScriptObject
+@StubClass("elemental2.core.JsArray")
+public class JsArray<T>
 {
     private final List<T> list = new ArrayList<T>();
 
-    protected JsArray()
+    public JsArray()
     {
     }
 
@@ -80,7 +82,7 @@ public class JsArray<T extends JavaScriptObject> extends JavaScriptObject
         {
             for (int i = list.size(); i < newLength; i++)
             {
-                push(null);
+                this.push(list.get(i));
             }
         }
     }

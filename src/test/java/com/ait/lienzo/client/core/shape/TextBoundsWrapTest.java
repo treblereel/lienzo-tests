@@ -75,7 +75,9 @@ public class TextBoundsWrapTest extends BaseTextTest {
 
         when(tested.getLineHeight(context)).thenReturn(1.0);
         tested.getBoundingBox();
-        assertTrue(bbox.getWidth() >= tested.getBoundingBox().getWidth());
+        assertEquals(bbox.getWidth(),
+                     tested.getBoundingBox().getWidth(),
+                     0.0001);
 
         tested.drawWithTransforms(context,
                                   1,

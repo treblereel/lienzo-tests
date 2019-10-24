@@ -19,6 +19,7 @@ package com.ait.lienzo.client.core.shape.wires.handlers.impl;
 import com.ait.lienzo.client.core.event.NodeDragMoveEvent;
 import com.ait.lienzo.client.core.shape.IDirectionalMultiPointShape;
 import com.ait.lienzo.client.core.shape.IPrimitive;
+import com.ait.lienzo.client.core.shape.Node;
 import com.ait.lienzo.client.core.shape.wires.WiresConnector;
 import com.ait.lienzo.client.core.shape.wires.WiresManager;
 import com.ait.lienzo.client.core.shape.wires.handlers.WiresConnectorControl;
@@ -62,9 +63,10 @@ public class WiresControlPointHandlerImplTest {
     @Test
     public void testOnNodeDragMove() {
         NodeDragMoveEvent event = mock(NodeDragMoveEvent.class);
+
         when(event.getX()).thenReturn(2);
         when(event.getY()).thenReturn(7);
-        IPrimitive<?> primitive = mock(IPrimitive.class);
+        Node primitive = mock(Node.class);
         when(primitive.getX()).thenReturn(12d);
         when(primitive.getY()).thenReturn(17d);
         when(event.getSource()).thenReturn(primitive);

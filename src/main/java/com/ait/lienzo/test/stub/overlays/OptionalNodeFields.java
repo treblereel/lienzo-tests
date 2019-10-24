@@ -17,8 +17,8 @@
 package com.ait.lienzo.test.stub.overlays;
 
 import com.ait.lienzo.test.annotation.StubClass;
-import com.ait.tooling.common.api.java.util.UUID;
-import com.ait.tooling.nativetools.client.collection.MetaData;
+import com.ait.lienzo.tools.client.collection.MetaData;
+import com.ait.lienzo.tools.common.api.java.util.UUID;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.shared.HandlerManager;
 
@@ -27,7 +27,7 @@ public class OptionalNodeFields extends JavaScriptObject
 {
     private String         m_uuid;
 
-    private MetaData       m_meta;
+    private MetaData m_meta;
 
     private Object         m_user;
 

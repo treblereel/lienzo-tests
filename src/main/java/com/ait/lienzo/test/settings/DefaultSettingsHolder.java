@@ -48,7 +48,38 @@ import com.ait.lienzo.test.translator.StripFinalModifiersTranslatorInterceptor;
         },
 
         stubs = {
-                com.ait.lienzo.test.stub.overlays.BoundingBoxJSO.class,
+
+                com.ait.lienzo.test.stub.UIEvent.class,
+                com.ait.lienzo.test.stub.NFastArrayList.class,
+                com.ait.lienzo.test.stub.NFastStringMap.class,
+                com.ait.lienzo.test.stub.NFastDoubleArray.class,
+                com.ait.lienzo.test.stub.Uint8ClampedArray.class,
+                com.ait.lienzo.test.stub.overlays.Point2DArray.class,
+                com.ait.lienzo.test.stub.LienzoCore.class,
+                com.ait.lienzo.test.stub.NFastStringMap.class,
+                com.ait.lienzo.test.stub.overlays.JsArray.class,
+                com.ait.lienzo.test.stub.RootPanel.class,
+                com.ait.lienzo.test.stub.Node.class,
+                //com.ait.lienzo.test.stub.overlays.HandlerManager.class,
+                //com.ait.lienzo.test.stub.overlays.HandlerRegistrationImpl.class,
+                //com.ait.lienzo.test.stub.overlays.Element.class,
+                com.ait.lienzo.test.stub.overlays.DomGlobal.class,
+                com.ait.lienzo.test.stub.overlays.HTMLDocument.class,
+                com.ait.lienzo.test.stub.overlays.HTMLCanvasElement.class,
+                com.ait.lienzo.test.stub.overlays.HTMLDivElement.class,
+                com.ait.lienzo.test.stub.overlays.HTMLElement.class,
+                com.ait.lienzo.test.stub.overlays.ImageData.class,
+                //com.ait.lienzo.test.stub.overlays.CanvasRenderingContext2D.class,
+                //com.ait.lienzo.test.stub.overlays.TextMetrics.class,
+                //com.ait.lienzo.test.stub.overlays.FillStyleUnionType.class,
+                //com.ait.lienzo.test.stub.overlays.Context2D.class,
+
+
+                com.ait.lienzo.test.stub.overlays.ScratchPad.class,
+                com.ait.lienzo.test.stub.overlays.Timer.class,
+
+
+/*                com.ait.lienzo.test.stub.overlays.BoundingBoxJSO.class,
                 com.ait.lienzo.test.stub.overlays.DragBoundsJSO.class,
                 com.ait.lienzo.test.stub.overlays.TransformJSO.class,
                 com.ait.lienzo.test.stub.overlays.ShadowJSO.class,
@@ -68,7 +99,7 @@ import com.ait.lienzo.test.translator.StripFinalModifiersTranslatorInterceptor;
                 com.ait.lienzo.test.stub.overlays.OptionalGroupOfFields.class,
                 com.ait.lienzo.test.stub.Attributes.class,
                 com.ait.lienzo.test.stub.NFastArrayList.class,
-                com.ait.lienzo.test.stub.NFastStringMap.class,
+                com.ait.lienzo.test.stub.NFastStringMap.class,*/
         },
 
         jsoStubs = {
@@ -108,7 +139,7 @@ import com.ait.lienzo.test.translator.StripFinalModifiersTranslatorInterceptor;
                 CanvasSupportTranslatorInterceptor.class,
                 StripFinalModifiersTranslatorInterceptor.class,
                 LienzoNodeTranslatorInterceptor.class,
-                GWTTranslatorInterceptor.class
+                GWTTranslatorInterceptor.class,
         },
 
         logEnabled = false
