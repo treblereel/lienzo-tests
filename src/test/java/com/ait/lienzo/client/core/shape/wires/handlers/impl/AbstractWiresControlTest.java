@@ -93,8 +93,6 @@ public abstract class AbstractWiresControlTest {
         manager.getMagnetManager().createMagnets(parent);
         manager.setDockingAcceptor(dockingAcceptor);
 
-        when(layer.getViewport()).thenReturn(viewport);
-
         when(shapeControl.getMagnetsControl()).thenReturn(shapeMagnetsControl);
         when(parentControl.getMagnetsControl()).thenReturn(parentMagnetsControl);
 

@@ -54,7 +54,10 @@ import com.ait.lienzo.client.widget.DefaultDragConstraintEnforcer;
 import com.ait.lienzo.client.widget.DragConstraintEnforcer;
 import com.ait.lienzo.client.widget.DragContext;
 import com.ait.lienzo.test.LienzoMockitoTestRunner;
+import com.ait.lienzo.tools.client.event.HandlerManager;
 import com.ait.lienzo.tools.client.event.HandlerRegistrationManager;
+import com.google.gwtmockito.WithClassesToStub;
+import elemental2.core.JsArray;
 import elemental2.dom.HTMLDivElement;
 import elemental2.dom.ImageData;
 import org.junit.Before;
@@ -70,6 +73,7 @@ import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.*;
 
 @RunWith(LienzoMockitoTestRunner.class)
+@WithClassesToStub({JsArray.class, HandlerManager.class})
 public class WiresConnectorControlImplTest {
 
     private static final Point2D CP0_INIT = new Point2D(0, 50);

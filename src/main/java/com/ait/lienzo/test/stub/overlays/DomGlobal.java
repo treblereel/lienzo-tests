@@ -15,6 +15,7 @@ public class DomGlobal {
         return new Random().nextInt();
     }
 
+<<<<<<< HEAD
     public static final double setTimeout(
             SetTimeoutCallbackFn callback, double delay, Object... var_args) {
         return setTimeout(callback, delay, var_args);
@@ -24,4 +25,6 @@ public class DomGlobal {
         void onInvoke(Object... p0);
     }
 
+=======
+>>>>>>> Fri 25 Oct 2019 09:29:32 PM CEST
 }
