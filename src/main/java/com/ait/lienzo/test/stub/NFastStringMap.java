@@ -47,12 +47,16 @@ public class NFastStringMap<V>
 
     public NFastStringMap<V> put(final String key, final V value)
     {
+        System.out.println("PUT " + key);
+
         map.put(key, value);
         return this;
     }
 
     public V get(final String key)
     {
+        System.out.println("GET " + key + " " + map.containsKey(key));
+
         //return map.get(NUtils.doKeyRepair(key));
         return map.get(key);
     }

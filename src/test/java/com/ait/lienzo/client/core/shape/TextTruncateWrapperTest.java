@@ -19,9 +19,6 @@ package com.ait.lienzo.client.core.shape;
 import com.ait.lienzo.client.core.types.BoundingBox;
 import com.ait.lienzo.shared.core.types.TextAlign;
 import com.ait.lienzo.test.LienzoMockitoTestRunner;
-import com.google.gwtmockito.WithClassesToStub;
-import elemental2.dom.CanvasRenderingContext2D;
-import elemental2.dom.DomGlobal;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -32,7 +29,6 @@ import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 @RunWith(LienzoMockitoTestRunner.class)
-@WithClassesToStub({DomGlobal.class, CanvasRenderingContext2D.class})
 public class TextTruncateWrapperTest extends BaseTextTest {
 
     @Test
