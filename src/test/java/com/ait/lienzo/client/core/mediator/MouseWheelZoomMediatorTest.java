@@ -19,6 +19,7 @@ import com.ait.lienzo.client.core.shape.Scene;
 import com.ait.lienzo.client.core.shape.Viewport;
 import com.ait.lienzo.client.core.types.Transform;
 import com.ait.lienzo.test.LienzoMockitoTestRunner;
+import elemental2.dom.HTMLDivElement;
 import elemental2.dom.WheelEvent;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,16 +41,24 @@ public class MouseWheelZoomMediatorTest
     private Viewport               viewport;
 
     @Mock
+    private HTMLDivElement         element;
+
+    @Mock
     private Scene scene;
 
     @Before
     public void setUp()
     {
+
         this.tested = new MouseWheelZoomMediator();
         this.tested.setZoomFactor(0.3);
         this.tested.setViewport(viewport);
 
         when(viewport.getScene()).thenReturn(scene);
+        when(viewport.getElement()).thenReturn(element);
+
+        viewport.setTransform(new Transform());
+
         when(viewport.getTransform()).thenReturn(new Transform());
 
     }
@@ -59,10 +68,13 @@ public class MouseWheelZoomMediatorTest
     {
         tested.setScaleAboutPoint(true);
         tested.onMouseWheel(mouseWheelEvent, 110, 323);
+
         assertEquals(0.7692307692307692d, viewport.getTransform().getScaleX(), 0d);
         assertEquals(0.7692307692307692d, viewport.getTransform().getScaleY(), 0d);
         assertEquals(25.384615384615387d, viewport.getTransform().getTranslateX(), 0d);
         assertEquals(74.53846153846155d, viewport.getTransform().getTranslateY(), 0d);
+
+
     }
 
     @Test
@@ -73,11 +85,9 @@ public class MouseWheelZoomMediatorTest
         when(mouseWheelEvent.getX()).thenReturn(110);
         when(mouseWheelEvent.getY()).thenReturn(323);*/
 
-        mouseWheelEvent.x = 110;
-        mouseWheelEvent.y = 323;
 
         tested.setScaleAboutPoint(false);
-        tested.onMouseWheel(mouseWheelEvent, 0, 0);
+        tested.onMouseWheel(mouseWheelEvent, 110, 323);
         assertEquals(0.7692307692307692d, viewport.getTransform().getScaleX(), 0d);
         assertEquals(0.7692307692307692d, viewport.getTransform().getScaleY(), 0d);
         assertEquals(0d, viewport.getTransform().getTranslateX(), 0d);

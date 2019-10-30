@@ -78,7 +78,7 @@ public class WiresShapeControlHandleListTest
     private WiresMagnetsControl              magnetsControl;
 
     @Mock
-    private HandlerRegistrationManager handlerRegistrationManager;
+    private HandlerRegistrationManager       handlerRegistrationManager;
 
     @Mock
     private ControlHandleList                controlHandleList;
@@ -175,32 +175,50 @@ public class WiresShapeControlHandleListTest
 
         final Point2D c0 = new Point2D(0, 0);
         final Point2D s0 = new Point2D(0, 0);
-        realShape.setResizable(true).addWiresResizeStartHandler(event -> {
-            c0.setX(event.getX());
-            c0.setY(event.getY());
-            s0.setX(event.getWidth());
-            s0.setY(event.getHeight());
+
+        realShape.setResizable(true).addWiresResizeStartHandler(new WiresResizeStartHandler()
+        {
+            @Override
+            public void onShapeResizeStart(final WiresResizeStartEvent event)
+            {
+                c0.setX(event.getX());
+                c0.setY(event.getY());
+                s0.setX(event.getWidth());
+                s0.setY(event.getHeight());
+            }
         });
         final Point2D c1 = new Point2D(0, 0);
         final Point2D s1 = new Point2D(0, 0);
-        realShape.addWiresResizeStepHandler(event -> {
-            c1.setX(event.getX());
-            c1.setY(event.getY());
-            s1.setX(event.getWidth());
-            s1.setY(event.getHeight());
+        realShape.addWiresResizeStepHandler(new WiresResizeStepHandler()
+        {
+            @Override
+            public void onShapeResizeStep(final WiresResizeStepEvent event)
+            {
+                c1.setX(event.getX());
+                c1.setY(event.getY());
+                s1.setX(event.getWidth());
+                s1.setY(event.getHeight());
+            }
         });
         final Point2D c2 = new Point2D(0, 0);
         final Point2D s2 = new Point2D(0, 0);
-        realShape.addWiresResizeEndHandler(event -> {
-            c2.setX(event.getX());
-            c2.setY(event.getY());
-            s2.setX(event.getWidth());
-            s2.setY(event.getHeight());
+        realShape.addWiresResizeEndHandler(new WiresResizeEndHandler()
+        {
+            @Override
+            public void onShapeResizeEnd(final WiresResizeEndEvent event)
+            {
+                c2.setX(event.getX());
+                c2.setY(event.getY());
+                s2.setX(event.getWidth());
+                s2.setY(event.getHeight());
+            }
         });
         // TODO: For now locations of mouse are not handles during drag events,
         // Event handlers checks Control Point position instead
         EventMockUtils.dragStart(primitive0, 9991, 9992);
         EventMockUtils.dragMove(primitive0, 9993, 9994);
+        EventMockUtils.dragEnd(primitive0, 9995, 9996);
+
         EventMockUtils.dragEnd(primitive0, 9995, 9996);
 
         assertEquals(1.0, c0.getX(), 0);
@@ -322,7 +340,7 @@ public class WiresShapeControlHandleListTest
         listOfChildren.add(child2);
         listOfChildren.add(child3);
 
-        tested = spy(new WiresShapeControlHandleList(shape, IControlHandle.ControlHandleStandardType.RESIZE, controlHandleList, handlerRegistrationManager));
+        tested = new WiresShapeControlHandleList(shape, IControlHandle.ControlHandleStandardType.RESIZE, controlHandleList, handlerRegistrationManager);
         tested.hide();
 
         verify(controlHandleList).hide();

@@ -10,7 +10,7 @@ import elemental2.core.Uint8ClampedArray;
 @StubClass("elemental2.dom.ImageData")
 public class ImageData {
 
-    public Uint8ClampedArray data;
+    public Uint8ClampedArray data = new Uint8ClampedArray(1);
 
     public int width = 0;
     public int height = 0;

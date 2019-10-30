@@ -15,6 +15,7 @@
  */
 package com.ait.lienzo.client.core.shape.wires.handlers.impl;
 
+import com.ait.lienzo.client.core.event.NodeDragEndEvent;
 import com.ait.lienzo.client.core.event.NodeDragMoveEvent;
 import com.ait.lienzo.client.core.event.NodeDragStartEvent;
 import com.ait.lienzo.client.core.event.NodeMouseClickEvent;
@@ -162,13 +163,12 @@ public class WiresConnectorHandlerImplTest
         verify(control, never()).onMoveComplete();
     }
 
-/*    @Test
+    @Test
     public void testOnDragEndAccept()
     {
         DragContext      context = mockDragContext();
         NodeDragEndEvent event   = mock(NodeDragEndEvent.class);
         when(event.getDragContext()).thenReturn(context);
-        when(control.onMoveComplete()).thenReturn(true);
         tested.onNodeDragEnd(event);
         verify(control, times(1)).execute();
         verify(control, times(1)).onMoveComplete();
@@ -183,14 +183,13 @@ public class WiresConnectorHandlerImplTest
         DragContext      context = mockDragContext();
         NodeDragEndEvent event   = mock(NodeDragEndEvent.class);
         when(event.getDragContext()).thenReturn(context);
-        when(control.onMoveComplete()).thenReturn(false);
         tested.onNodeDragEnd(event);
         verify(control, times(1)).reset();
         verify(control, times(1)).onMoveComplete();
         verify(control, never()).onMove(anyDouble(), anyDouble());
         verify(control, never()).onMoveStart(anyDouble(), anyDouble());
         verify(control, never()).execute();
-    }*/
+    }
 
     @Test
     public void testOnNodeMouseClick()
@@ -201,7 +200,7 @@ public class WiresConnectorHandlerImplTest
         NodeMouseClickEvent event = mock(NodeMouseClickEvent.class);
         when(event.getX()).thenReturn(120);
         when(event.getY()).thenReturn(454);
-        transform.scale(2); //TODO scale(2, 4)
+        transform.scaleWithXY(2, 4); //TODO scale(2, 4)
         tested.onNodeMouseClick(event);
         verify(mouseDownTimer, times(1)).cancel();
         verify(mouseDownTimer, never()).run();
