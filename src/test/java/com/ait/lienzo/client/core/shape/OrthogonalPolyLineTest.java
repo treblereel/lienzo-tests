@@ -5,7 +5,6 @@ import com.ait.lienzo.client.core.types.Point2D;
 import com.ait.lienzo.client.core.types.Point2DArray;
 import com.ait.lienzo.shared.core.types.Direction;
 import com.ait.lienzo.test.LienzoMockitoTestRunner;
-import com.google.gwtmockito.WithClassesToStub;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -27,15 +26,10 @@ import static org.mockito.Mockito.when;
 public class OrthogonalPolyLineTest
 {
 
-    @Mock
-    Point2DArray array;
-
     @Test
     public void testGetBoundingBoxForEmptyPath()
     {
-        when(array.size()).thenReturn(0);
-
-        OrthogonalPolyLine polyLine = new OrthogonalPolyLine(array);
+        OrthogonalPolyLine polyLine = new OrthogonalPolyLine(new Point2DArray());
         BoundingBox box = polyLine.getBoundingBox();
 
         assertEquals(0, box.getMinX(), 0.000001);

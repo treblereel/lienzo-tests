@@ -47,7 +47,7 @@ public class BezierCurveTest {
         BoundingBox boundingBox = curve.getBoundingBox();
         assertEquals(50, boundingBox.getMinX(), 0);
         assertEquals(20, boundingBox.getMinY(), 0);
-        assertEquals(157.06256395286275, boundingBox.getMaxX(), 0);
+        assertEquals(157.06256395286277, boundingBox.getMaxX(), 0);
         assertEquals(100, boundingBox.getMaxY(), 0);
     }
 

@@ -39,9 +39,6 @@ public abstract class BaseTextTest {
     @Mock
     protected ScratchPad scratchPad;
 
-    @Mock
-    protected HTMLCanvasElement canvasElement;
-
     protected ArrayList<DrawnText> drawnTexts = new ArrayList<>();
 
     protected Answer<Object> drawTextAnswer = invocation -> {
@@ -49,7 +46,6 @@ public abstract class BaseTextTest {
         String text = (String) args[0];
         double x = (double) args[1];
         double y = (double) args[2];
-
         drawnTexts.add(new DrawnText(text,
                                      x,
                                      y));
@@ -63,9 +59,8 @@ public abstract class BaseTextTest {
         when(context.measureText(anyString())).thenAnswer((Answer<TextMetrics>) invocation -> {
             Object[] args = invocation.getArguments();
             String arg = (String) args[0];
-            TextMetrics out = mock(TextMetrics.class);
+            TextMetrics out = new TextMetrics();
             when(out.width).thenReturn(arg.length() * 1.0);
-            when(out.width).thenReturn(1.0);
             return out;
         });
 

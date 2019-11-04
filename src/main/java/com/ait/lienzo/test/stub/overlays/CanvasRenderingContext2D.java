@@ -1,6 +1,7 @@
 package com.ait.lienzo.test.stub.overlays;
 
 import com.ait.lienzo.test.annotation.StubClass;
+import elemental2.dom.ImageData;
 
 @StubClass("elemental2.dom.CanvasRenderingContext2D")
 public class CanvasRenderingContext2D {
@@ -32,6 +33,23 @@ public class CanvasRenderingContext2D {
         }
 
     }
+
+    public ImageData getImageData(int sx, int sy, int sw, int sh) {
+        //System.out.println("ImageData getImageData ");
+
+        return new ImageData(100, 100);
+    }
+
+    public void fillRect(double x, double y, double w, double h) {
+    }
+
+    public void fillText(String text, double x, double y, double maxWidth) {
+
+    }
+
+    public void fillText(String text, double x, double y) {
+    }
+
 
 
 

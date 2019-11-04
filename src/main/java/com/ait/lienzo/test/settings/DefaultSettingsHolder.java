@@ -69,37 +69,14 @@ import com.ait.lienzo.test.translator.StripFinalModifiersTranslatorInterceptor;
                 com.ait.lienzo.test.stub.overlays.HTMLDivElement.class,
                 com.ait.lienzo.test.stub.overlays.HTMLElement.class,
                 com.ait.lienzo.test.stub.overlays.ImageData.class,
-                //com.ait.lienzo.test.stub.overlays.CanvasRenderingContext2D.class,
+                com.ait.lienzo.test.stub.overlays.CanvasRenderingContext2D.class,
                 //com.ait.lienzo.test.stub.overlays.TextMetrics.class,
                 //com.ait.lienzo.test.stub.overlays.FillStyleUnionType.class,
-                //com.ait.lienzo.test.stub.overlays.Context2D.class,
+                com.ait.lienzo.test.stub.overlays.Context2D.class,
 
 
                 com.ait.lienzo.test.stub.overlays.ScratchPad.class,
                 com.ait.lienzo.test.stub.overlays.Timer.class,
-
-
-/*                com.ait.lienzo.test.stub.overlays.BoundingBoxJSO.class,
-                com.ait.lienzo.test.stub.overlays.DragBoundsJSO.class,
-                com.ait.lienzo.test.stub.overlays.TransformJSO.class,
-                com.ait.lienzo.test.stub.overlays.ShadowJSO.class,
-                com.ait.lienzo.test.stub.overlays.NObjectJSO.class,
-                com.ait.lienzo.test.stub.overlays.Point2DJSO.class,
-                com.ait.lienzo.test.stub.overlays.DragBoundsJSO.class,
-                com.ait.lienzo.test.stub.overlays.JsArray.class,
-                com.ait.lienzo.test.stub.overlays.JsArrayMixed.class,
-                com.ait.lienzo.test.stub.overlays.PathPartListJSO.class,
-                com.ait.lienzo.test.stub.overlays.PathPartEntryJSO.class,
-                com.ait.lienzo.test.stub.overlays.Point2DArrayJSO.class,
-                com.ait.lienzo.test.stub.overlays.NArrayBaseJSO.class,
-                com.ait.lienzo.test.stub.overlays.NFastPrimitiveArrayBaseJSO.class,
-                com.ait.lienzo.test.stub.overlays.NFastDoubleArrayJSO.class,
-                com.ait.lienzo.test.stub.overlays.OptionalNodeFields.class,
-                com.ait.lienzo.test.stub.overlays.OptionalShapeFields.class,
-                com.ait.lienzo.test.stub.overlays.OptionalGroupOfFields.class,
-                com.ait.lienzo.test.stub.Attributes.class,
-                com.ait.lienzo.test.stub.NFastArrayList.class,
-                com.ait.lienzo.test.stub.NFastStringMap.class,*/
         },
 
         jsoStubs = {

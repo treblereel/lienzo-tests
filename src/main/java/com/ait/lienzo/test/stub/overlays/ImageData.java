@@ -10,9 +10,21 @@ import elemental2.core.Uint8ClampedArray;
 @StubClass("elemental2.dom.ImageData")
 public class ImageData {
 
-    public Uint8ClampedArray data = new Uint8ClampedArray(1);
+    public Uint8ClampedArray data;
 
     public int width = 0;
     public int height = 0;
+
+    public ImageData(double d1, double d2) {
+        //System.out.println("ImageData  " + d1 + " " + d2);
+        data = new Uint8ClampedArray(28);
+
+/*        for (int i = 0; i < 28; i++) {
+            data.setAt(i, 1d);
+        }*/
+
+
+
+    }
 
 }

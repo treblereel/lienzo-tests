@@ -58,6 +58,26 @@ public class Point2DArray {
         return new Point2DArray();
     }
 
+    public static final com.ait.lienzo.client.core.types.Point2DArray fromNFastDoubleArray(final NFastDoubleArray array) {
+        final com.ait.lienzo.client.core.types.Point2DArray points = new com.ait.lienzo.client.core.types.Point2DArray();
+
+        if (null == array) {
+            return points;
+        }
+        final int size = Math.abs(array.size());
+
+        if (size < 1) {
+            return points;
+        }
+        if ((size % 2) == 1) {
+            throw new IllegalArgumentException("size of array is not a multiple of 2");
+        }
+        for (int i = 0; i < size; i += 2) {
+            points.pushXY(array.get(i), array.get(i + 1));
+        }
+        return points;
+    }
+
     public void init() {
 
     }
@@ -68,36 +88,10 @@ public class Point2DArray {
 
     public int push(Point2D... point2D) {
         for (Point2D point2D1 : point2D) {
-            holder.push(point2D1);
+            holder.add(point2D1);
         }
         return holder.size();
     }
-
-    public static final com.ait.lienzo.client.core.types.Point2DArray fromNFastDoubleArray(final NFastDoubleArray array)
-    {
-        final com.ait.lienzo.client.core.types.Point2DArray points = new com.ait.lienzo.client.core.types.Point2DArray();
-
-        if (null == array)
-        {
-            return points;
-        }
-        final int size = Math.abs(array.size());
-
-        if (size < 1)
-        {
-            return points;
-        }
-        if ((size % 2) == 1)
-        {
-            throw new IllegalArgumentException("size of array is not a multiple of 2");
-        }
-        for (int i = 0; i < size; i += 2)
-        {
-            points.pushXY(array.get(i), array.get(i + 1));
-        }
-        return points;
-    }
-
 
     public void pop() {
         holder.pop();
@@ -109,10 +103,9 @@ public class Point2DArray {
     }
 
     public final Point2D get(final int i) {
-        return getAt(i);
+        return holder.get(i);
     }
 
-    //@Override
     public Point2D getAt(int index) {
         return holder.get(index);
     }
@@ -138,18 +131,20 @@ public class Point2DArray {
         return no;
     }
 
-    public Point2DArray copy() {
-        final Point2DArray no = new Point2DArray();
-        final int sz = holder.size();
+    public final Point2DArray copy() {
+        Point2DArray no = new Point2DArray();
+        int sz = holder.size();
         if (sz < 1) {
             return no;
         }
         for (int i = 0; i < sz; i++) {
-            final Point2D p = holder.get(i);
-            no.holder.push(new Point2D(p.getX(), p.getY()));
+            Point2D p = getAt(i);
+            no.set(i, p.copy());
         }
         return no;
     }
+
+    ;
 
     private com.ait.lienzo.client.core.types.Point2DArray _toOriginal(Point2DArray holder) {
         final com.ait.lienzo.client.core.types.Point2DArray no = new com.ait.lienzo.client.core.types.Point2DArray();
@@ -160,47 +155,48 @@ public class Point2DArray {
         for (int i = 0; i < sz; i++) {
             final Point2D p = holder.get(i);
 
-
             no.push(new Point2D(p.getX(), p.getY()));
         }
         return no;
-
     }
 
     private com.ait.lienzo.client.core.types.Point2DArray _toOriginal() {
         return _toOriginal(this);
     }
 
-    public final Point2DArray set(final int i, final Point2D p)
-    {
-        holder.add(i, p);
+    public final Point2DArray set(final int i, final Point2D p) {
 
+
+/*        if(i >= holder.size()) {
+            throw new UnsupportedOperationException(i + " " + holder.size());
+        }*/
+
+        if (holder.size() > i) {
+            holder.set(i, p);
+        } else {
+            holder.add(i, p);
+        }
         return this;
     }
 
-    public final Collection<Point2D> getPoints()
-    {
+    public final Collection<Point2D> getPoints() {
         final int size = size();
 
         final ArrayList<Point2D> list = new ArrayList<Point2D>(size);
 
-        for (int i = 0; i < size; i++)
-        {
+        for (int i = 0; i < size; i++) {
             list.add(get(i));
         }
         return Collections.unmodifiableCollection(list);
     }
 
-    public final BoundingBox getBoundingBox()
-    {
+    public final BoundingBox getBoundingBox() {
         return BoundingBox.fromPoint2DArray(_toOriginal());
     }
 
-    public final Point2D[] asArray()
-    {
+    public final Point2D[] asArray() {
         Point2D[] itemsArray = new Point2D[holder.size()];
         return holder.stream().collect(Collectors.toList()).toArray(itemsArray);
-
     }
 
     public int size() {
@@ -212,9 +208,7 @@ public class Point2DArray {
         return getClass().getCanonicalName();
     }
 
-    public final String toJSONString()
-    {
+    public final String toJSONString() {
         return "{}";
     }
-
 }

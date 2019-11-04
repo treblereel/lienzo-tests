@@ -113,4 +113,11 @@ public class NFastDoubleArray extends NFastPrimitiveArrayBase<NFastDoubleArray>
     {
         return list.contains(value);
     }
+
+    public static final com.ait.lienzo.tools.client.collection.NFastDoubleArray make2P(final double i, final double i1)
+    {
+        com.ait.lienzo.tools.client.collection.NFastDoubleArray array = new com.ait.lienzo.tools.client.collection.NFastDoubleArray();
+        array.push( i, i1);
+        return array;
+    }
 }
