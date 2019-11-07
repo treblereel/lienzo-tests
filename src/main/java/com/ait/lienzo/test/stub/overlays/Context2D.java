@@ -353,8 +353,6 @@ public class Context2D
 
     public ImageData getImageData(final int x, final int y, final int width, final int height)
     {
-        //System.out.println("getImageData " + width + " " + height);
-
         return m_jso.getImageData(x, y, width, height);
     }
 
@@ -383,11 +381,6 @@ public class Context2D
 
     public TextMetrics measureText(final String text)
     {
-
-        //System.out.println("measureText " + text.length());
-
-        //throw new NullPointerException(text + " " + text.length());
-
         TextMetrics textMetrics = new TextMetrics();
         textMetrics.width = text.length();
         return textMetrics;

@@ -77,8 +77,6 @@ public class WiresContainerTest
     @Mock
     private Viewport viewport;
 
-    private HTMLDivElement element;
-
     @Mock
     private AlignAndDistributeControl  alignAndDistributeControl;
 
@@ -89,7 +87,6 @@ public class WiresContainerTest
     @Before
     public void setup()
     {
-        when(viewport.getElement()).thenReturn(element);
         when(layer.getViewport()).thenReturn(viewport);
         wiresManager = spy(WiresManager.get(layer));
         layoutContainerGroup = spy(new Group());
@@ -168,6 +165,7 @@ public class WiresContainerTest
         assertFalse(tested.isListening());
     }
 
+    //TODO WiresContainer:176
     @Test
     public void testAddChild()
     {
@@ -176,8 +174,9 @@ public class WiresContainerTest
         final NFastArrayList<WiresShape> children = tested.getChildShapes();
         assertEquals(1, tested.getChildShapes().size());
         assertEquals(tested, children.get(0).getParent());
-        verify(layoutContainerGroup).setX(0);
-        verify(layoutContainerGroup).setY(0);
+
+        assertEquals(0, layoutContainerGroup.getX(), 0);
+        assertEquals(0, layoutContainerGroup.getY(), 0);
     }
 
     @Test

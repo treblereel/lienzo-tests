@@ -57,15 +57,15 @@ public class PolyLineTest {
     @Test
     public void testParseWhenPointsSizeIsGreaterThanOne() {
 
-        final Point2D point1 = new Point2D(1, 1);
-        final Point2D point2 = new Point2D(2, 2);
-        final Point2DArray point2DArray = makePointArray(point1, point2);
+        final Point2D point = new Point2D(1.0, 1.0);
+        final Point2DArray point2DArray = makePointArray(point);
 
         polyLine.setPoint2DArray(point2DArray);
-        polyLine.parse(); //TODO not sure if it must be called
+        final boolean parse = polyLine.parse();
 
-        assertEquals(point1, polyLine.getHeadOffsetPoint());
-        assertEquals(point2, polyLine.getTailOffsetPoint());
+        assertTrue(parse);
+        assertEquals(point, polyLine.getTailOffsetPoint());
+        assertEquals(point, polyLine.getHeadOffsetPoint());
     }
 
     @Test

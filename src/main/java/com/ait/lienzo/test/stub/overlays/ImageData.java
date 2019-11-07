@@ -16,15 +16,7 @@ public class ImageData {
     public int height = 0;
 
     public ImageData(double d1, double d2) {
-        //System.out.println("ImageData  " + d1 + " " + d2);
         data = new Uint8ClampedArray(28);
-
-/*        for (int i = 0; i < 28; i++) {
-            data.setAt(i, 1d);
-        }*/
-
-
-
     }
 
 }

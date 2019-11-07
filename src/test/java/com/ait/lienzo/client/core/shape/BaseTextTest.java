@@ -49,7 +49,6 @@ public abstract class BaseTextTest {
         drawnTexts.add(new DrawnText(text,
                                      x,
                                      y));
-
         return null;
     };
 

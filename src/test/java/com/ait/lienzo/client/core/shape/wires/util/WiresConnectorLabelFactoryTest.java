@@ -65,6 +65,7 @@ public class WiresConnectorLabelFactoryTest {
         WiresConnectorLabelFactory.SegmentLabelExecutor executor = new WiresConnectorLabelFactory.SegmentLabelExecutor();
         Segment segment = new Segment(0, start, end);
         executor.consumer().accept(segment, text);
+
         assertNotNull(text.getWrapper());
         TextBoundsWrap wrapper = (TextBoundsWrap) text.getWrapper();
         assertEquals(BoundingBox.fromDoubles(0d, 0d, 22.808989455914087d, 11d), wrapper.getWrapBoundaries());

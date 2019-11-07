@@ -51,6 +51,7 @@ import java.util.function.Consumer;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyDouble;
 import static org.mockito.Matchers.anyInt;
@@ -169,10 +170,13 @@ public class WiresConnectorHandlerImplTest
         DragContext      context = mockDragContext();
         NodeDragEndEvent event   = mock(NodeDragEndEvent.class);
         when(event.getDragContext()).thenReturn(context);
+        when(control.onMove(anyDouble(), anyDouble())).thenReturn(false);
+        when(control.accept()).thenReturn(true); //TODO check this
         tested.onNodeDragEnd(event);
+
         verify(control, times(1)).execute();
         verify(control, times(1)).onMoveComplete();
-        verify(control, never()).onMove(anyDouble(), anyDouble());
+        verify(control, times(1)).onMove(anyDouble(), anyDouble());
         verify(control, never()).onMoveStart(anyDouble(), anyDouble());
         verify(control, never()).reset();
     }
@@ -183,10 +187,12 @@ public class WiresConnectorHandlerImplTest
         DragContext      context = mockDragContext();
         NodeDragEndEvent event   = mock(NodeDragEndEvent.class);
         when(event.getDragContext()).thenReturn(context);
+        when(control.onMove(anyDouble(), anyDouble())).thenReturn(false);
         tested.onNodeDragEnd(event);
+
         verify(control, times(1)).reset();
-        verify(control, times(1)).onMoveComplete();
-        verify(control, never()).onMove(anyDouble(), anyDouble());
+        verify(control, times(1)).onMove(anyDouble(), anyDouble());
+        verify(control, never()).onMoveComplete();
         verify(control, never()).onMoveStart(anyDouble(), anyDouble());
         verify(control, never()).execute();
     }

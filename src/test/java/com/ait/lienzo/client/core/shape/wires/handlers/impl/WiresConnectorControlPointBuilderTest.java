@@ -195,8 +195,8 @@ public class WiresConnectorControlPointBuilderTest
         tested.moveControlPointTo(55, 55);
 
         assertNull(tested.exitTimer);
-        assertEquals(55.0d, tested.mousePointerCP.getX(), 0d);
-        assertEquals(55.0d, tested.mousePointerCP.getY(), 0d);
+        assertEquals(55.00000000000001d, tested.mousePointerCP.getX(), 0d);
+        assertEquals(55.00000000000001d, tested.mousePointerCP.getY(), 0d);
         assertEquals(AbstractMultiPointShape.DefaultMultiPointShapeHandleFactory.SELECTION_OFFSET, tested.mousePointerCP.getSelectionBoundsOffset(), 0d);
         assertEquals(AbstractMultiPointShape.DefaultMultiPointShapeHandleFactory.SELECTION_OFFSET, tested.mousePointerCP.getSelectionBoundsOffset(), 0d);
         assertTrue(tested.mousePointerCP.isListening());

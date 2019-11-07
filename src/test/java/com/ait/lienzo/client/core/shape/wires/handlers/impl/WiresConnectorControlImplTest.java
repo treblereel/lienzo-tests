@@ -259,12 +259,6 @@ public class WiresConnectorControlImplTest {
         when(line.getOverLayer()).thenReturn(layer);
         connector = spy(new WiresConnector(headMagnet, tailMagnet, line, headDecorator, tailDecorator));
 
-
-
-
-
-
-
         when(headConnection.getControl()).thenReturn(cpShape0);
         when(tailConnection.getControl()).thenReturn(cpShape4);
         when(headConnection.getConnector()).thenReturn(connector);
@@ -303,22 +297,21 @@ public class WiresConnectorControlImplTest {
         Point2D p2 = new Point2D(101, 50);
         Point2D p3 = new Point2D(151, 50);
         Point2D p4 = new Point2D(201, 50);
-        //boolean moved1 = tested.moveControlPoint(0, p0);
+        boolean moved1 = tested.moveControlPoint(0, p0);
         boolean moved2 = tested.moveControlPoint(1, p1);
-        //boolean moved3 = tested.moveControlPoint(2, p2);
-        //boolean moved4 = tested.moveControlPoint(3, p3);
-        //boolean moved5 = tested.moveControlPoint(4, p4);
-/*        assertTrue(moved1);
+        boolean moved3 = tested.moveControlPoint(2, p2);
+        boolean moved4 = tested.moveControlPoint(3, p3);
+        boolean moved5 = tested.moveControlPoint(4, p4);
+        assertTrue(moved1);
         assertTrue(moved2);
         assertTrue(moved3);
         assertTrue(moved4);
         assertTrue(moved5);
-        assertEquals(CP0_INIT, CP0);*/
-
-        assertEquals(p1, CP1);
-        assertEquals(p2, CP2);
-        assertEquals(p3, CP3);
-        assertEquals(p4, CP4);
+        assertEquals(CP0_INIT, CP0);
+        assertEquals(p1, connector.getControlPoints().get(1));
+        assertEquals(p2, connector.getControlPoints().get(2));
+        assertEquals(p3, connector.getControlPoints().get(3));
+        assertEquals(CP4_INIT, connector.getControlPoints().get(4));
         verify(connector, never()).moveControlPoint(eq(1), eq(p0));
         verify(connector, atLeastOnce()).moveControlPoint(eq(1), eq(p1));
         verify(connector, atLeastOnce()).moveControlPoint(eq(2), eq(p2));

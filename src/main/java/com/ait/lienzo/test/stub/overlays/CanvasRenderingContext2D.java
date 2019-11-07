@@ -35,8 +35,6 @@ public class CanvasRenderingContext2D {
     }
 
     public ImageData getImageData(int sx, int sy, int sw, int sh) {
-        //System.out.println("ImageData getImageData ");
-
         return new ImageData(100, 100);
     }
 

@@ -15,6 +15,13 @@
  */
 package com.ait.lienzo.client.core.shape.wires.layout.direction;
 
+import com.ait.lienzo.client.core.shape.MultiPath;
+import com.ait.lienzo.client.core.shape.Text;
+import com.ait.lienzo.client.core.shape.TextNoWrap;
+import com.ait.lienzo.client.core.shape.TextUtils;
+import com.ait.lienzo.client.core.types.PathPartEntryJSO;
+import com.ait.lienzo.client.core.types.PathPartList;
+import com.ait.lienzo.client.core.types.PathPartListJSO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +34,9 @@ import com.ait.lienzo.client.core.shape.wires.layout.direction.DirectionLayout.V
 import com.ait.lienzo.client.core.types.BoundingBox;
 import com.ait.lienzo.test.LienzoMockitoTestRunner;
 
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(LienzoMockitoTestRunner.class)
 public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<DirectionLayout, DirectionContainerLayout>
@@ -40,26 +49,28 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
     public void setUp()
     {
         super.setUp();
+        when(child.getBoundingBox()).thenReturn(BoundingBox.fromDoubles(0,0,0,0));
+
         currentLayout = new DirectionLayout.Builder().build();
         parentBoundingBox = parent.getBoundingBox();
         childBoundingBox = child.getBoundingBox();
     }
 
     //Outside
-
     @Test
     public void add1()
     {
+
         currentLayout = new DirectionLayout.Builder()
                 .horizontalAlignment(HorizontalAlignment.LEFT)
                 .verticalAlignment(VerticalAlignment.TOP)
                 .referencePosition(ReferencePosition.OUTSIDE)
                 .orientation(Orientation.HORIZONTAL)
                 .build();
-
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getX() - childBoundingBox.getWidth());
-        verify(child).setY(parentBoundingBox.getY());
+
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getX() - childBoundingBox.getWidth());
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getY());
     }
 
     @Test
@@ -73,8 +84,9 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getX() - childBoundingBox.getWidth());
-        verify(child).setY(parentBoundingBox.getHeight() / 2 - childBoundingBox.getHeight() / 2);
+
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getX() - childBoundingBox.getWidth());
+        verify(tested).setVerticalAlignment(child,parentBoundingBox.getHeight() / 2 - childBoundingBox.getHeight() / 2);
     }
 
     @Test
@@ -88,8 +100,9 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getX() - childBoundingBox.getWidth());
-        verify(child).setY(parentBoundingBox.getHeight());
+
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getX() - childBoundingBox.getWidth());
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getHeight());
     }
 
     @Test
@@ -103,8 +116,8 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getWidth() / 2 - childBoundingBox.getWidth() / 2);
-        verify(child).setY(parentBoundingBox.getY());
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getWidth() / 2 - childBoundingBox.getWidth() / 2);
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getY());
     }
 
     @Test
@@ -118,8 +131,8 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getWidth());
-        verify(child).setY(parentBoundingBox.getY());
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getWidth());
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getY());
     }
 
     //Inside
@@ -135,8 +148,8 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getX());
-        verify(child).setY(parentBoundingBox.getY());
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getX());
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getY());
     }
 
     @Test
@@ -150,8 +163,8 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getX());
-        verify(child).setY(parentBoundingBox.getHeight() / 2 - childBoundingBox.getHeight() / 2);
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getX());
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getHeight() / 2 - childBoundingBox.getHeight() / 2);
     }
 
     @Test
@@ -165,8 +178,8 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getX());
-        verify(child).setY(parentBoundingBox.getHeight() - childBoundingBox.getHeight());
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getX());
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getHeight() - childBoundingBox.getHeight());
     }
 
     @Test
@@ -180,8 +193,8 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getWidth() / 2 - childBoundingBox.getWidth() / 2);
-        verify(child).setY(parentBoundingBox.getY());
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getWidth() / 2 - childBoundingBox.getWidth() / 2);
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getY());
     }
 
     @Test
@@ -195,8 +208,8 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getWidth() - childBoundingBox.getWidth());
-        verify(child).setY(parentBoundingBox.getY());
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getWidth() - childBoundingBox.getWidth());
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getY());
     }
 
     //Margins Inside
@@ -213,8 +226,8 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getX() + 5.0);
-        verify(child).setY(parentBoundingBox.getY() + 5.0);
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getX() + 5.0);
+        verify(tested).setVerticalAlignment(child,parentBoundingBox.getY() + 5.0);
     }
 
     @Test
@@ -230,8 +243,8 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getWidth() - childBoundingBox.getWidth() - 5.0);
-        verify(child).setY(parentBoundingBox.getHeight() - childBoundingBox.getHeight() - 5.0);
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getWidth() - childBoundingBox.getWidth() - 5.0);
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getHeight() - childBoundingBox.getHeight() - 5.0);
     }
 
     //Margins outside
@@ -248,8 +261,8 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getWidth() + 5.0);
-        verify(child).setY(parentBoundingBox.getHeight() + 5.0);
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getWidth() + 5.0);
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getHeight() + 5.0);
     }
 
     @Test
@@ -265,8 +278,8 @@ public class DirectionContainerLayoutTest extends AbstractContainerLayoutTest<Di
                 .build();
 
         tested.add(child, currentLayout);
-        verify(child).setX(parentBoundingBox.getX() - childBoundingBox.getWidth() - 5.0);
-        verify(child).setY(parentBoundingBox.getY() - childBoundingBox.getHeight() - 5.0);
+        verify(tested).setHorizontalAlignment(child, parentBoundingBox.getX() - childBoundingBox.getWidth() - 5.0);
+        verify(tested).setVerticalAlignment(child, parentBoundingBox.getY() - childBoundingBox.getHeight() - 5.0);
     }
 
     @Override
