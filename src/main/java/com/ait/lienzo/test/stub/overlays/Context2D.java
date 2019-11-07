@@ -28,7 +28,7 @@ import elemental2.dom.TextMetrics;
 @StubClass("com.ait.lienzo.client.core.Context2D")
 public class Context2D
 {
-    private final NativeContext2D m_jso;
+    private final NativeContext2D jso;
 
     public Context2D(final HTMLCanvasElement element)
     {
@@ -37,26 +37,26 @@ public class Context2D
 
     public Context2D(final NativeContext2D jso)
     {
-        m_jso = jso;
+        this.jso = jso;
     }
 
     public NativeContext2D getNativeContext()
     {
-        return m_jso;
+        return jso;
     }
 
     /**
      * Save and push a new container context to the stack
      */
     public void saveContainer(String id){
-        m_jso.saveContainer(id);
+        jso.saveContainer(id);
     }
 
     /**
      * Restore and pop the current container context from the stack returning to the previous context
      */
     public void restoreContainer(){
-        m_jso.restoreContainer();
+        jso.restoreContainer();
     }
 
     /**
@@ -64,11 +64,11 @@ public class Context2D
      */
     public void save()
     {
-        m_jso.save();
+        jso.save();
     }
 
     public void save(String id){
-        m_jso.save(id);
+        jso.save(id);
     }
 
     /**
@@ -76,37 +76,37 @@ public class Context2D
      */
     public void restore()
     {
-        m_jso.restore();
+        jso.restore();
     }
 
     public void beginPath()
     {
-        m_jso.beginPath();
+        jso.beginPath();
     }
 
     public void closePath()
     {
-        m_jso.closePath();
+        jso.closePath();
     }
 
     public void rect(final double x, final double y, final double w, final double h)
     {
-        m_jso.rect(x, y, w, h);
+        jso.rect(x, y, w, h);
     }
 
     public void fillRect(final double x, final double y, final double w, final double h)
     {
-        m_jso.fillRect(x, y, w, h);
+        jso.fillRect(x, y, w, h);
     }
 
     public void fill()
     {
-        m_jso.fill();
+        jso.fill();
     }
 
     public void stroke()
     {
-        m_jso.stroke();
+        jso.stroke();
     }
 
     public void setFillColor(final String color)
@@ -127,33 +127,31 @@ public class Context2D
 
     public void arc(final double x, final double y, final double radius, final double startAngle, final double endAngle, final boolean antiClockwise)
     {
-        m_jso.arc(x, y, radius, startAngle, endAngle, antiClockwise);
+        jso.arc(x, y, radius, startAngle, endAngle, antiClockwise);
     }
 
     public void arc(final double x, final double y, final double radius, final double startAngle, final double endAngle)
     {
-        m_jso.arc(x, y, radius, startAngle, endAngle, false);
+        jso.arc(x, y, radius, startAngle, endAngle, false);
     }
 
     public void arcTo(final double x1, final double y1, final double x2, final double y2, final double radius)
     {
-        m_jso.arcTo(x1, y1, x2, y2, radius);
+        jso.arcTo(x1, y1, x2, y2, radius);
     }
 
     public void ellipse(final double x, final double y, final double radiusX, final double radiusY, final double rotation, final double startAngle, final double endAngle, final boolean antiClockwise)
     {
-        m_jso.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, antiClockwise);
+        jso.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle, antiClockwise);
     }
 
     public void ellipse(final double x, final double y, final double radiusX, final double radiusY, final double rotation, final double startAngle, final double endAngle)
     {
-        m_jso.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle);
+        jso.ellipse(x, y, radiusX, radiusY, rotation, startAngle, endAngle);
     }
 
     public void setStrokeColor(final String color)
     {
-        //m_jso.setStrokeColor(color);
-        //m_jso.strokeStyle = StrokeStyleUnionType.of(color);
     }
 
     /**
@@ -165,164 +163,164 @@ public class Context2D
      */
     public void setStrokeColor(final IColor color)
     {
-        //m_jso.strokeStyle = StrokeStyleUnionType.of((null != color) ? color.getColorString() : null);
+        //jso.strokeStyle = StrokeStyleUnionType.of((null != color) ? color.getColorString() : null);
     }
 
     public void setStrokeWidth(final double width)
     {
-        m_jso.setLineWidth(width);
+        jso.setLineWidth(width);
     }
 
     public void setLineCap(final LineCap linecap)
     {
-        m_jso.setLineCap((null != linecap) ? linecap.getValue() : null);
+        jso.setLineCap((null != linecap) ? linecap.getValue() : null);
     }
 
     public void setLineJoin(final LineJoin linejoin)
     {
-        m_jso.setLineJoin((null != linejoin) ? linejoin.getValue() : null);
+        jso.setLineJoin((null != linejoin) ? linejoin.getValue() : null);
     }
 
     public void transform(final double d0, final double d1, final double d2, final double d3, final double d4, final double d5)
     {
-        m_jso.transform(d0, d1, d2, d3, d4, d5);
+        jso.transform(d0, d1, d2, d3, d4, d5);
     }
 
     public void setTransform(final double d0, final double d1, final double d2, final double d3, final double d4, final double d5)
     {
-        m_jso.setTransform(d0, d1, d2, d3, d4, d5);
-    };
+        jso.setTransform(d0, d1, d2, d3, d4, d5);
+    }
 
     public void setToIdentityTransform()
     {
-        m_jso.setToIdentityTransform();
-    };
+        jso.setToIdentityTransform();
+    }
 
     public void moveTo(final double x, final double y)
     {
-        m_jso.moveTo(x, y);
+        jso.moveTo(x, y);
     }
 
     public void bezierCurveTo(final double cp1x, final double cp1y, final double cp2x, final double cp2y, final double x, final double y)
     {
-        m_jso.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+        jso.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
     }
 
     public void lineTo(final double x, final double y)
     {
-        m_jso.lineTo(x, y);
+        jso.lineTo(x, y);
     }
 
     public void setFillGradient(final LinearGradient gradient)
     {
-        m_jso.setFillGradient((null != gradient) ? gradient.getJSO() : null);
+        jso.setFillGradient((null != gradient) ? gradient.getJSO() : null);
     }
 
     public void setFillGradient(final RadialGradient gradient)
     {
-        m_jso.setFillGradient((null != gradient) ? gradient.getJSO() : null);
+        jso.setFillGradient((null != gradient) ? gradient.getJSO() : null);
     }
 
     public void setFillGradient(final PatternGradient gradient)
     {
-        m_jso.setFillGradient((null != gradient) ? gradient.getJSO() : null);
+        jso.setFillGradient((null != gradient) ? gradient.getJSO() : null);
     }
 
     public void quadraticCurveTo(final double cpx, final double cpy, final double x, final double y)
     {
-        m_jso.quadraticCurveTo(cpx, cpy, x, y);
+        jso.quadraticCurveTo(cpx, cpy, x, y);
     }
 
     public void transform(final Transform transform)
     {
-        m_jso.transform((null != transform) ? transform : null);
+        jso.transform((null != transform) ? transform : null);
     }
 
     public void setTransform(final Transform transform)
     {
-        m_jso.setTransform((null != transform) ? transform : null);
+        jso.setTransform((null != transform) ? transform : null);
     }
 
     public void fillTextWithGradient(final String text, final double x, final double y, final double sx, final double sy, final double ex, final double ey, final String color)
     {
-        m_jso.fillTextWithGradient(text, x, y, sx, sy, ex, ey, color);
+        jso.fillTextWithGradient(text, x, y, sx, sy, ex, ey, color);
     }
 
     public void setTextFont(final String font)
     {
-        m_jso.setTextFont(font);
+        jso.setTextFont(font);
     }
 
     public void setTextBaseline(final TextBaseLine baseline)
     {
-        m_jso.setTextBaseline((null != baseline) ? baseline.getValue() : null);
+        jso.setTextBaseline((null != baseline) ? baseline.getValue() : null);
     }
 
     public void setTextAlign(final TextAlign textAlign)
     {
-        m_jso.setTextAlign((null != textAlign) ? textAlign.getValue() : null);
+        jso.setTextAlign((null != textAlign) ? textAlign.getValue() : null);
     }
 
     public void fillText(final String text, final double x, final double y)
     {
-        m_jso.fillText(text, x, y);
+        jso.fillText(text, x, y);
     }
 
     public void strokeText(final String text, final double x, final double y)
     {
-        m_jso.strokeText(text, x, y);
+        jso.strokeText(text, x, y);
     }
 
     public void setGlobalAlpha(final double alpha)
     {
-        m_jso.setGlobalAlpha(alpha);
+        jso.setGlobalAlpha(alpha);
     }
 
     public void translate(final double x, final double y)
     {
-        m_jso.translate(x, y);
+        jso.translate(x, y);
     }
 
     public void rotate(final double rot)
     {
-        m_jso.rotate(rot);
+        jso.rotate(rot);
     }
 
     public void scale(final double sx, final double sy)
     {
-        m_jso.scale(sx*m_jso.scalingRatio , sy*m_jso.scalingRatio);
+        jso.scale(sx*jso.scalingRatio , sy*jso.scalingRatio);
     }
 
     public void clearRect(final double x, final double y, final double wide, final double high)
     {
-        m_jso.clearRect(x, y, wide, high);
+        jso.clearRect(x, y, wide, high);
     }
 
     public void setShadow(final Shadow shadow)
     {
-        m_jso.setShadow((null != shadow) ? shadow.getJSO() : null);
+        jso.setShadow((null != shadow) ? shadow.getJSO() : null);
     }
 
     public void clip()
     {
-        m_jso.clip();
+        jso.clip();
     }
 
     public void resetClip()
     {
-        m_jso.resetClip();
+        jso.resetClip();
     }
 
     public void setMiterLimit(final double limit)
     {
-        m_jso.setMiterLimit(limit);
+        jso.setMiterLimit(limit);
     }
 
     public boolean path(final PathPartList list)
     {
         if (null != list)
         {
-            return m_jso.path(list.getJSO());
+            return jso.path(list.getJSO());
         }
         return false;
     }
@@ -331,19 +329,19 @@ public class Context2D
     {
         if (null != list)
         {
-            return m_jso.clip(list.getJSO());
+            return jso.clip(list.getJSO());
         }
         return false;
     }
 
     public boolean isSupported(final String feature)
     {
-        return m_jso.isSupported(feature);
+        return jso.isSupported(feature);
     }
 
     public boolean isPointInPath(final double x, final double y)
     {
-        return m_jso.isPointInPath(x, y);
+        return jso.isPointInPath(x, y);
     }
 
     public ImageDataPixelColor getImageDataPixelColor(final int x, final int y)
@@ -353,30 +351,28 @@ public class Context2D
 
     public ImageData getImageData(final int x, final int y, final int width, final int height)
     {
-        return m_jso.getImageData(x, y, width, height);
+        return jso.getImageData(x, y, width, height);
     }
 
     public void putImageData(final ImageData imageData, final int x, final int y)
     {
-        m_jso.putImageData(imageData, x, y);
+        jso.putImageData(imageData, x, y);
     }
 
     public void putImageData(final ImageData imageData, final int x, final int y, final int dirtyX, final int dirtyY, final int dirtyWidth, final int dirtyHeight)
     {
-        m_jso.putImageData(imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight);
+        jso.putImageData(imageData, x, y, dirtyX, dirtyY, dirtyWidth, dirtyHeight);
     }
 
     public ImageData createImageData(final int width, final int height)
     {
-        return m_jso.createImageData(width, height);
+        return jso.createImageData(width, height);
     }
 
     public ImageData createImageData(final ImageData data)
     {
         // @FIXME this doesn't exist on Elm2
-        //return m_jso.createImageData(data);
-        //m_jso.createImageData(o,o);
-        return m_jso.createImageData(data.width, data.height);
+        return jso.createImageData(data.width, data.height);
     }
 
     public TextMetrics measureText(final String text)
@@ -388,87 +384,82 @@ public class Context2D
 
     public void setGlobalCompositeOperation(final CompositeOperation operation)
     {
-        m_jso.setGlobalCompositeOperation((null != operation) ? operation.getValue() : null);
+        jso.setGlobalCompositeOperation((null != operation) ? operation.getValue() : null);
     }
-
-//    public void setImageSmoothingEnabled(final boolean enabled)
-//    {
-//        m_jso.setImageSmoothingEnabled(enabled);
-//    }
 
     public void drawImage(final HTMLImageElement image, final double x, final double y)
     {
-        m_jso.drawImage(image, x, y);
+        jso.drawImage(image, x, y);
     }
 
     public void drawImage(final HTMLImageElement image, final double x, final double y, final double w, final double h)
     {
-        m_jso.drawImage(image, x, y, w, h);
+        jso.drawImage(image, x, y, w, h);
     }
 
     public void drawImage(final HTMLImageElement image, final double sx, final double sy, final double sw, final double sh, final double x, final double y, final double w, final double h)
     {
-        m_jso.drawImage(image, sx, sy, sw, sh, x, y, w, h);
+        jso.drawImage(image, sx, sy, sw, sh, x, y, w, h);
     }
 
     public void drawImage(final HTMLCanvasElement image, final double x, final double y)
     {
-        m_jso.drawImage(image, x, y);
+        jso.drawImage(image, x, y);
     }
 
     public void drawImage(final HTMLCanvasElement image, final double x, final double y, final double w, final double h)
     {
-        m_jso.drawImage(image, x, y, w, h);
+        jso.drawImage(image, x, y, w, h);
     }
 
     public void drawImage(final HTMLCanvasElement image, final double sx, final double sy, final double sw, final double sh, final double x, final double y, final double w, final double h)
     {
-        m_jso.drawImage(image, sx, sy, sw, sh, x, y, w, h);
+        jso.drawImage(image, sx, sy, sw, sh, x, y, w, h);
     }
 
     public void drawImage(final HTMLVideoElement image, final double x, final double y)
     {
-        m_jso.drawImage(image, x, y);
+        jso.drawImage(image, x, y);
     }
 
     public void drawImage(final HTMLVideoElement image, final double x, final double y, final double w, final double h)
     {
-        m_jso.drawImage(image, x, y, w, h);
+        jso.drawImage(image, x, y, w, h);
     }
 
     public void drawImage(final HTMLVideoElement image, final double sx, final double sy, final double sw, final double sh, final double x, final double y, final double w, final double h)
     {
-        m_jso.drawImage(image, sx, sy, sw, sh, x, y, w, h);
+        jso.drawImage(image, sx, sy, sw, sh, x, y, w, h);
     }
 
     public void setLineDash(final DashArray dashes)
     {
-        m_jso.setLineDash((null != dashes) ? dashes.getJSO() : null);
+        jso.setLineDash((null != dashes) ? dashes.getJSO() : null);
     }
 
     public void setLineDashOffset(final double offset)
     {
-        m_jso.lineDashOffset = offset;
+        jso.lineDashOffset = offset;
     }
 
     public double getBackingStorePixelRatio()
     {
-        return m_jso.getBackingStorePixelRatio();
+        return jso.getBackingStorePixelRatio();
     }
 
     public void fill(final Path2D path)
     {
-        m_jso.fill(path);
+        jso.fill(path);
     }
 
     public void stroke(final Path2D path)
     {
-        m_jso.stroke(path);
+        jso.stroke(path);
     }
 
     public void clip(final Path2D path)
     {
-        m_jso.clip(path);
+        jso.clip(path);
     }
 
     public boolean isSelection()

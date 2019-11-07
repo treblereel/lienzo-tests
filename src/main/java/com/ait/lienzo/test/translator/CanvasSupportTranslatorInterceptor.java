@@ -41,10 +41,6 @@ public class CanvasSupportTranslatorInterceptor implements LienzoMockitoClassTra
 
     private static final String METHOD_IS_SUPPORTED = "isSupported";
 
-    public CanvasSupportTranslatorInterceptor()
-    {
-    }
-
     @Override
     public boolean interceptBeforeParent(final ClassPool classPool, final String name) throws NotFoundException, CannotCompileException
     {
